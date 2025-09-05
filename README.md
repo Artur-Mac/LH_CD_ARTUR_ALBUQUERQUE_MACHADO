@@ -1,18 +1,39 @@
 # Como Utilizar os códigos?
 
-- AED: Arquivo onde está localizada a análise exploratória, para utilizar, basta escrever clonar o repositório e dar pip install requirements.txt
-- 
+É necessário clonar o repositório e no terminal digitar o comando pip install requirements.txt
 
+#### **clean_columns.ipynb**: início da pipeline de processamento dos dados brutos, etapa em que é feito
+- Remoção de coluna Unnamed: 0 (gerada automaticamente pelo pandas)
+- Identificação inicial de colunas e comportamento macro
+- Limpeza e formatação de colunas
+- Identificação de comportamento atípicos (duplicatas em algumas variáveis, como título ou número de votos)
+- Salvamento do df preprocessado
 
+#### **feature_add.ipynb**: integração de dados com a api do TMDB e criação de novas features (além de alguns ajustes manuais)
+- Adição de diversas novas colunas para auxiliar no df a partir da api (ex: detalhamento de data de lançamento, budget, popularidade, métrica do imdb atualizada diariamente, entre outras)
+- Adição manual de valores em colunas com poucos valores faltantes (certificate e date_detail)
+- Criação de features de mercado preenchidas por medianas ou outras taxas (apenas para análise exploratória, caso fossem colocados em aprendizado de máquina seria um vazamento de dados que poderia causar overfitting)
+	
+#### **EDA.ipynb**: documento que tem como objetivo utilizar das diversas variáveis novas e dados tratados para não só entender profundamente o mercado de filmes de sucesso, mas também responder a todas as dúvidas dos stakeholders
+- Análise macro das variáveis
+- Comportamento de correlações entre as colunas (para fazer isso foram utilizadas diversas funções matemáticas como: Pearson para numérica x numérica, ANOVA para categóricas x numéricas e V-Cramer que advém do chi-quadrado para compreender as relações entre variáveis categóricas)
+- Compreensão de outliers relacionados a retorno de investimento (foi percebido que os filmes de baixo custo que podem alcançar o público mainstream são filmes de terror)
+- Viu-se a necessidade de criar mais algumas features a partir das já existentes (como o índice de recomendação de filme)
+- Análise temporal: entendimento da evolução dos valores de faturamento e lucro
+- Checagem de sazonalidade baseada em meses
+- Predição de gênero a partir do overview com processamento de linguagem natural básico
 
+#### **pred.ipynb**: predição de nota do imdb a partir do df padrão (evitando vazamento de dados)
+- Extremamente desafiante por conta do número de amostras e variabilidade dos dados
+- Para o filme proposto, a nota encontrada foi de 8,9
+- Entendimento de features que influenciam de forma situacional no modelo
 
+---
 
 ### Colunas paralelas com o *dataframe* original
 
 * **Gross, Revenue e Budget**: refletem informações parecidas. são extremamente úteis para entender o comportamento do mercado
-
-    - A melhor estratégia foi gerar novas colunas de interação. Mesmo tendo logicas parecidas (e alta correlação) e importante manter o Gross original e criar um novo gross_fill que não vai ser usado no treinametno já que tem vazamento de dados (foi preenchido pela mediana)
-    - Revenue
+- A melhor estratégia foi gerar novas colunas de interação. Mesmo tendo lógicas parecidas (e alta correlação) é importante manter o Gross original e criar um novo gross_fill que não vai ser usado no treinamento já que tem vazamento de dados (foi preenchido pela mediana)
 
 * **Certificate**: está presente nos dois *df*.
 
@@ -63,9 +84,6 @@
    * O projeto foca exclusivamente em lançamentos nos cinemas.
    * Questões ligadas ao mercado de streaming foram deixadas para trabalhos futuros, já que exigem dados específicos e análises próprias.
    * Além disso, há uma dimensão cronológica: o filme mais recente da base é de 2020, o que também deve ser considerado nas interpretações.
-
-
-
 
 
 # Top_Film_Analysis
@@ -128,5 +146,3 @@ Análise de filmes em contexto do mercado
 ```
 
 --------
-
-
