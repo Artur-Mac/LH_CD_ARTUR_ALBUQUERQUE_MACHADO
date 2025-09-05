@@ -1,7 +1,8 @@
 # Como Utilizar os códigos?
 
-É necessário clonar o repositório (`git clone https://github.com/Artur-Mac/LH_CD_ARTUR_ALBUQUERQUE_MACHADO/blob/master/notebooks/EDA.ipynb`) e no terminal digitar o comando pip install requirements.txt
-
+É necessário clonar o repositório 
+- `git clone https://github.com/Artur-Mac/LH_CD_ARTUR_ALBUQUERQUE_MACHADO/blob/master/notebooks/EDA.ipynb`
+- No terminal digitar o comando pip install requirements.txt
 
 
 #### **clean_columns.ipynb**: início da pipeline de processamento dos dados brutos, etapa em que é feito
