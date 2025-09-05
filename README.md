@@ -7,7 +7,62 @@
 
 
 
+### Colunas paralelas com o *dataframe* original
 
+* **Gross, Revenue e Budget**: refletem informações parecidas. são extremamente úteis para entender o comportamento do mercado
+
+    - A melhor estratégia foi gerar novas colunas de interação. Mesmo tendo logicas parecidas (e alta correlação) e importante manter o Gross original e criar um novo gross_fill que não vai ser usado no treinametno já que tem vazamento de dados (foi preenchido pela mediana)
+    - Revenue
+
+* **Certificate**: está presente nos dois *df*.
+
+  * Estratégia: discretizar, já que é uma variável ordinal.
+  * Depois de verificar discrepâncias, decidiremos qual coluna manter. A princípio, a ideia é preservar a coluna original e complementar com a nova, garantindo ausência de nulos.
+
+---
+
+### Colunas novas que podem gerar bons insights
+
+* **Budget**: custo de produção do filme.
+
+  * De longe, a mais relevante entre as colunas adicionais, já que permite calcular métricas como **ROI** e **profit bruto**, fundamentais para a análise.
+
+* **Keywords**: palavras-chave associadas ao filme.
+
+  * Podem complementar o processamento de linguagem natural da coluna **Overview**, oferecendo insights sobre os tipos de tramas que atraem mais atenção do público.
+
+* **Popularity**: índice de popularidade atribuído pelo IMDb.
+
+  * Usa múltiplas métricas, e será interessante investigar como é calculado e qual impacto tem na performance do filme.
+
+* **date\_details**: ano de lançamento original do filme.
+
+  * Essencial para análises de sazonalidade. Exemplo: filmes de ação podem ter desempenho melhor em períodos de férias nos EUA.
+
+* **Production\_Countries**: países de produção.
+
+  * Útil para identificar padrões, como os contextos mais comuns de blockbusters.
+
+---
+
+### Observações importantes
+
+1. **Previsão futura e vazamento de dados**
+
+   * Tanto o *df* original quanto o processado trazem colunas que indicam performance **após o lançamento**.
+   * Para construir modelos preditivos robustos (ou seja, capazes de estimar o sucesso de um filme **antes** dele estrear), é essencial excluir variáveis como número de votos, notas do IMDb, Metascore, Popularidade, entre outras que só existem depois da exibição.
+
+2. **Não inclusão de novos filmes**
+
+   * A estrutura do *df* foi preservada, mesmo que a amostragem seja pequena e enviesada.
+   * Adicionar novos filmes poderia desviar do desafio inicial. Por outro lado, novas *features* apenas enriquecem a análise sem alterar a base original.
+
+3. **Escopo e limitações**
+
+    * Um fator extremamente importante é que para o treinamento as colunas originais tratadas que serão usadas para manter fidelidade com o desafio e evitar vazamento de dados (que estão presentes nas colunas que foram preenchidas com )
+   * O projeto foca exclusivamente em lançamentos nos cinemas.
+   * Questões ligadas ao mercado de streaming foram deixadas para trabalhos futuros, já que exigem dados específicos e análises próprias.
+   * Além disso, há uma dimensão cronológica: o filme mais recente da base é de 2020, o que também deve ser considerado nas interpretações.
 
 
 
@@ -74,59 +129,4 @@ Análise de filmes em contexto do mercado
 
 --------
 
-### Colunas paralelas com o *dataframe* original
 
-* **Gross, Revenue e Budget**: refletem informações parecidas. são extremamente úteis para entender o comportamento do mercado
-
-    - A melhor estratégia foi gerar novas colunas de interação. Mesmo tendo logicas parecidas (e alta correlação) e importante manter o Gross original e criar um novo gross_fill que não vai ser usado no treinametno já que tem vazamento de dados (foi preenchido pela mediana)
-    - Revenue
-
-* **Certificate**: está presente nos dois *df*.
-
-  * Estratégia: discretizar, já que é uma variável ordinal.
-  * Depois de verificar discrepâncias, decidiremos qual coluna manter. A princípio, a ideia é preservar a coluna original e complementar com a nova, garantindo ausência de nulos.
-
----
-
-### Colunas novas que podem gerar bons insights
-
-* **Budget**: custo de produção do filme.
-
-  * De longe, a mais relevante entre as colunas adicionais, já que permite calcular métricas como **ROI** e **profit bruto**, fundamentais para a análise.
-
-* **Keywords**: palavras-chave associadas ao filme.
-
-  * Podem complementar o processamento de linguagem natural da coluna **Overview**, oferecendo insights sobre os tipos de tramas que atraem mais atenção do público.
-
-* **Popularity**: índice de popularidade atribuído pelo IMDb.
-
-  * Usa múltiplas métricas, e será interessante investigar como é calculado e qual impacto tem na performance do filme.
-
-* **date\_details**: ano de lançamento original do filme.
-
-  * Essencial para análises de sazonalidade. Exemplo: filmes de ação podem ter desempenho melhor em períodos de férias nos EUA.
-
-* **Production\_Countries**: países de produção.
-
-  * Útil para identificar padrões, como os contextos mais comuns de blockbusters.
-
----
-
-### Observações importantes
-
-1. **Previsão futura e vazamento de dados**
-
-   * Tanto o *df* original quanto o processado trazem colunas que indicam performance **após o lançamento**.
-   * Para construir modelos preditivos robustos (ou seja, capazes de estimar o sucesso de um filme **antes** dele estrear), é essencial excluir variáveis como número de votos, notas do IMDb, Metascore, Popularidade, entre outras que só existem depois da exibição.
-
-2. **Não inclusão de novos filmes**
-
-   * A estrutura do *df* foi preservada, mesmo que a amostragem seja pequena e enviesada.
-   * Adicionar novos filmes poderia desviar do desafio inicial. Por outro lado, novas *features* apenas enriquecem a análise sem alterar a base original.
-
-3. **Escopo e limitações**
-
-    * Um fator extremamente importante é que para o treinamento as colunas originais tratadas que serão usadas para manter fidelidade com o desafio e evitar vazamento de dados (que estão presentes nas colunas que foram preenchidas com )
-   * O projeto foca exclusivamente em lançamentos nos cinemas.
-   * Questões ligadas ao mercado de streaming foram deixadas para trabalhos futuros, já que exigem dados específicos e análises próprias.
-   * Além disso, há uma dimensão cronológica: o filme mais recente da base é de 2020, o que também deve ser considerado nas interpretações.
